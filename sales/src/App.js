@@ -127,11 +127,12 @@ function App() {
     <div>
       <div>
         <NavbarOne/>
-        <ProductTable allProducts={allProducts} productImages={filteredImages} getImages={getImageByProductId} />
         <Switch>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
-        <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} />}/>
+        <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
+        productImages={filteredImages} getImages={getImageByProductId} />}/>
+         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} />}/>
         </Switch>
       </div>
     </div>

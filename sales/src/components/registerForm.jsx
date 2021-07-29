@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import useForm from './useForm';
 import Form from 'react-bootstrap/Form'
 
 const RegisterForm = (props) => {
     const {values, handleChange, handleSubmit} = useForm(createUser);
-    
+    const [redirect,setRedirect] = useState(false);
 
     async function createUser() {
         console.log(values.phone);
@@ -18,6 +18,7 @@ const RegisterForm = (props) => {
 
     return(
         <div>
+            {!redirect ?
             <Form onSubmit={handleSubmit}>
             <label>Username:
                     <input
@@ -94,6 +95,7 @@ const RegisterForm = (props) => {
                 
                 <button type='submit'>Register</button>
             </Form>
+            : <Redirect to='/'/>}
         </div>
     )
 };

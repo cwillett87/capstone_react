@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import Table from "react-bootstrap/Table";
-import {Route, Switch, Link, Redirect} from 'react-router-dom';
-import Image from "./image";
+import {withRouter, Switch, Link, Redirect} from 'react-router-dom';
 
 
 function ProductTable(props) {
         console.log(props);
         
         let products = props.allProducts.map((product) => {
+            console.log(product)
             return <tr key={product.id}>
-                <Image productImages={props.productImages} getImages={props.getImages} productId={product.id} />
-            <td>{product.name}</td>
+                <img src={product.main_image}  width="150" height="100"/>
+                <td>{product.name}</td>
                 <td>${product.price}.00</td>
                 <Link to={{pathname: '/product', query:{product:product}}}>Details</Link>
             </tr>
@@ -20,6 +20,7 @@ function ProductTable(props) {
                 <Table>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Name</th>
                             <th>Price</th>
                         </tr>
@@ -33,4 +34,4 @@ function ProductTable(props) {
     
 }
 
-export default ProductTable;
+export default withRouter (ProductTable);
