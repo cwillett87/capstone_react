@@ -21,6 +21,7 @@ function App() {
   const [filteredImages, setFilteredImages] = useState([]);
   const [userCarts, setUserCarts] = useState([]);
   const [filteredProductIds, setFilteredProductIds] = useState([]);
+  const [orderTotal, setOrderTotal] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -94,10 +95,20 @@ function App() {
   }
 
   let productIdToList = (carts) => {
+    let total = 0
     let productIds = carts.map((product) => 
-      (product.id));
+      ({price:product.product_Id.price * product.quantity}))
       setFilteredProductIds(productIds)
-      console.log(productIds)
+      console.log(productIds[0].price)
+      for(let i =0; i < productIds.length;i++)
+      total += productIds[i].price
+      console.log(total)
+      setOrderTotal(total)
+  }
+
+  let cartProducts = (productIds) => {
+    for(let i =0; i < productIds.length; i++)
+    getProductById(productIds[i])
   }
 
   let logoutUser = () =>{
@@ -199,12 +210,23 @@ function App() {
     }
   }
 
+  let createOrder = async (order) => {
+    try{
+      let response = await axios.post(`http://127.0.0.1:8000/sales/orders/`, order);
+      console.log(response.data)
+      console.log("created order")
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
         <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} />
         <Switch>
-      <Route path='/show-cart' render={props => <DisplayCartPage {...props} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
+    <Route path='/show-cart' render={props => <DisplayCartPage {...props} createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
         <Route path='/cart' render={props => <AddCart {...props} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>

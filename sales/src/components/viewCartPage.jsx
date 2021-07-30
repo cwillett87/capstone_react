@@ -13,7 +13,7 @@ function DisplayCartPage(props) {
     else{
     return(
         <div>
-            <ViewCart filteredProductIds={props.filteredProductIds} user={props.user} products={props.allProducts} userCarts={props.userCarts} deleteCart={props.deleteCart} />
+            <ViewCart createOrder={props.createOrder}  orderTotal={props.orderTotal} filteredProductIds={props.filteredProductIds} user={props.user} products={props.allProducts} userCarts={props.userCarts} deleteCart={props.deleteCart} />
         </div>
     );
     }
