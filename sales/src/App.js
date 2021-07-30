@@ -8,7 +8,8 @@ import {Route, Switch, Link, Redirect} from 'react-router-dom';
 import SignIn from './components/signInPage';
 import ProductTable from './components/productTable';
 import ProductPage from './components/productPage';
-
+import AddCart from './components/addCart';
+import DisplayCartPage from './components/viewCartPage';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -19,6 +20,7 @@ function App() {
   const [productById, setProductById] = useState([]);
   const [filteredImages, setFilteredImages] = useState([]);
   const [userCarts, setUserCarts] = useState([]);
+  const [filteredProductIds, setFilteredProductIds] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -84,11 +86,23 @@ function App() {
       let response = await axios.get(`http://127.0.0.1:8000/sales/users/me/`, {headers: {Authorization: 'Token ' + jwt}});
       setUser(response.data);
       console.log(response.data)
-      getCartsByUserId(user.id);
+      getCartsByUserId(response.data.id);
     }
     catch(err) {
       console.log(err);
     }
+  }
+
+  let productIdToList = (carts) => {
+    let productIds = carts.map((product) => 
+      (product.id));
+      setFilteredProductIds(productIds)
+      console.log(productIds)
+  }
+
+  let logoutUser = () =>{
+    localStorage.removeItem('token');
+    setUser(null);
   }
 
   let getAllProducts = async () => {
@@ -159,16 +173,26 @@ function App() {
         let response = await axios.get(`http://127.0.0.1:8000/sales/shopping-carts/${userId}/`);
         console.log(response.data)
         setUserCarts(response.data)
-        
+        productIdToList(response.data); 
       }
       catch(err) {
         console.log(err);
-      } 
+      }
   }
 
   let deleteCart = async (id) => {
     try{
-      await axios.delete(`http://127.0.0.1:8000/sales/shopping-carts-update//${id}/`)
+      await axios.delete(`http://127.0.0.1:8000/sales/shopping-carts-update/${id}/`)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let createCart = async (cart) => {
+    try{
+      let response = await axios.post(`http://127.0.0.1:8000/sales/shopping-carts/`, cart);
+      console.log(response.data)
     }
     catch(err) {
       console.log(err);
@@ -178,15 +202,17 @@ function App() {
   return (
     <div>
       <div>
-        <NavbarOne/>
+        <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} />
         <Switch>
+      <Route path='/show-cart' render={props => <DisplayCartPage {...props} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
+        <Route path='/cart' render={props => <AddCart {...props} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
         productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user}/>}/>
          <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} 
          getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
-         createProducts={createProducts} deleteProduct={deleteProduct} />}/>
+         createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
         </Switch>
       </div>
     </div>

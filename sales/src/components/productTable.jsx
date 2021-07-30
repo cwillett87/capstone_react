@@ -5,6 +5,7 @@ import PostProduct from "./postProduct";
 import DeleteProduct from "./deleteProduct";
 import { Button } from "react-bootstrap";
 import ViewCart from "./viewCart";
+import CartPage from "./addToCartPage"
 
 function ProductTable(props) {
         console.log(props);
@@ -28,6 +29,7 @@ function ProductTable(props) {
                 <td>{product.name}</td>
                 <td>${product.price}.00</td>
                 <Button><Link to={{pathname: '/product', query:{product:product}}}>Details</Link></Button>
+                <Button><Link to={{pathname: '/cart', query:{product:product}}}>Add</Link></Button>
                 <DeleteProduct deleteProduct={props.deleteProduct} productId={product.id} />
             </tr>
         });

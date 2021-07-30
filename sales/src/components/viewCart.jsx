@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Table from "react-bootstrap/Table";
 import DeleteFromCart from './deleteCart';
 
 
 function ViewCart(props){
+    console.log(props.userCarts)
+    
     if (props.userCarts === undefined) {
         return(
             null
         );
     }
     else {
+        
         let carts = props.userCarts.map((cart) => {
             console.log(cart);
             return <tr key={cart.id}>
