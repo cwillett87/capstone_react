@@ -4,14 +4,21 @@ import {withRouter, Switch, Link, Redirect} from 'react-router-dom';
 import PostProduct from "./postProduct";
 import DeleteProduct from "./deleteProduct";
 import { Button } from "react-bootstrap";
+import ViewCart from "./viewCart";
 
 function ProductTable(props) {
         console.log(props);
 
         const [postVisible, setPostVisible] = useState(false);
+        const [cartVisible, setCartVisible] = useState(false);
 
         let showPostForm = () =>{
             setPostVisible(!postVisible);
+        }
+
+        let showCart = () =>{
+            setCartVisible(!cartVisible);
+            props.getCartsByUserId(props.user.id);
         }
         
         let products = props.allProducts.map((product) => {
@@ -26,6 +33,14 @@ function ProductTable(props) {
         });
         return (
             <div>
+                <div>
+                <Button onClick={()=>{
+                showCart();
+            }}>View Cart</Button><br/><br/><br/>
+            {cartVisible? (
+                    <ViewCart user={props.user} products={props.allProducts} userCarts={props.userCarts} deleteCart={props.deleteCart} />
+                    ):null}
+                </div>
                 <Table>
                     <thead>
                         <tr>

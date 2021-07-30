@@ -18,11 +18,13 @@ function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [productById, setProductById] = useState([]);
   const [filteredImages, setFilteredImages] = useState([]);
+  const [userCarts, setUserCarts] = useState([]);
 
   useEffect(() => {
     getAllUsers();
     getToken();
     getAllProducts();
+    getCartsByUserId(user.id);
   },[]);
 
   let getToken = () => {
@@ -82,6 +84,7 @@ function App() {
       let response = await axios.get(`http://127.0.0.1:8000/sales/users/me/`, {headers: {Authorization: 'Token ' + jwt}});
       setUser(response.data);
       console.log(response.data)
+      getCartsByUserId(user.id);
     }
     catch(err) {
       console.log(err);
@@ -151,6 +154,27 @@ function App() {
     }
   }
 
+  let getCartsByUserId = async (userId) => {
+    try{
+        let response = await axios.get(`http://127.0.0.1:8000/sales/shopping-carts/${userId}/`);
+        console.log(response.data)
+        setUserCarts(response.data)
+        
+      }
+      catch(err) {
+        console.log(err);
+      } 
+  }
+
+  let deleteCart = async (id) => {
+    try{
+      await axios.delete(`http://127.0.0.1:8000/sales/shopping-carts-update//${id}/`)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
@@ -160,7 +184,8 @@ function App() {
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
         productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user}/>}/>
-         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} user={user} 
+         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} 
+         getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
          createProducts={createProducts} deleteProduct={deleteProduct} />}/>
         </Switch>
       </div>
