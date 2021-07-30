@@ -10,14 +10,12 @@ let handleRemove = () => {
 }
 
     return(
-        <div>
-            {!redirect ? 
         <td>
+        {!redirect ? 
             <Button variant="danger" type="button" onClick={() =>
                 (props.deleteProduct(props.productId), handleRemove())}>Remove</Button>
-            </td>
-            : <Redirect to='/'/>}
-        </div>
+                : <Redirect to='/'/>}
+                </td>
     )
 }
 

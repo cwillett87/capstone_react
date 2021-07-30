@@ -142,6 +142,15 @@ function App() {
     }
   }
 
+  let updateProduct = async (id, product) => {
+    try{
+      await axios.put(`http://127.0.0.1:8000/sales/products/${id}/`, product)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
@@ -150,7 +159,7 @@ function App() {
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
-        productImages={filteredImages} getImages={getImageByProductId} />}/>
+        productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user}/>}/>
          <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} user={user} 
          createProducts={createProducts} deleteProduct={deleteProduct} />}/>
         </Switch>

@@ -7,6 +7,12 @@ import { Button } from "react-bootstrap";
 
 function ProductTable(props) {
         console.log(props);
+
+        const [postVisible, setPostVisible] = useState(false);
+
+        let showPostForm = () =>{
+            setPostVisible(!postVisible);
+        }
         
         let products = props.allProducts.map((product) => {
             console.log(product)
@@ -34,7 +40,12 @@ function ProductTable(props) {
                 </Table>
                 <br/>
                 <div>
+                <Button onClick={()=>{
+                showPostForm();
+            }}>Add Product</Button><br/><br/><br/>
+            {postVisible? (
                     <PostProduct user={props.user} createProducts={props.createProducts} />
+                    ):null}
                 </div>
             </div>
         )

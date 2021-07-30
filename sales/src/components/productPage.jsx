@@ -2,9 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import Image from './image';
+import UpdateProduct from './updateProduct';
+import { Button } from "react-bootstrap";
+
 
 
 function ProductPage(props) {
+    const [formVisible, setFormVisible] = useState(false);
+
+let showUpdateForm = () => {
+    setFormVisible(!formVisible)
+}
+
     if(props.history.location.query === undefined){
         return null
     }
@@ -34,6 +43,16 @@ function ProductPage(props) {
                         </tr>
                 </tbody>
             </Table>
+            <br/>
+            <div>
+            <Button onClick={()=>{
+                showUpdateForm();
+            }}>Update</Button><br/><br/>
+            {formVisible? (
+                <UpdateProduct updateProduct={props.updateProduct} 
+                product={props.history.location.query.product} user={props.user}/>
+                ):null}
+            </div>
         </div>
     );
     }
