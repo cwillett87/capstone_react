@@ -123,6 +123,25 @@ function App() {
       } 
   }
 
+  let createProducts = async (product) => {
+    try{
+      let response = await axios.post(`http://127.0.0.1:8000/sales/products/`, product);
+      console.log(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let deleteProduct = async (id) => {
+    try{
+      await axios.delete(`http://127.0.0.1:8000/sales/products/${id}/`)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
@@ -132,7 +151,8 @@ function App() {
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
         productImages={filteredImages} getImages={getImageByProductId} />}/>
-         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} />}/>
+         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} user={user} 
+         createProducts={createProducts} deleteProduct={deleteProduct} />}/>
         </Switch>
       </div>
     </div>

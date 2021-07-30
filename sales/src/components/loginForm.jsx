@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
 import useForm from './useForm';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 
 const LoginForm = (props) => {
     const {values, handleChange, handleSubmit} = useForm(loginUser);

@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import Table from "react-bootstrap/Table";
 import {withRouter, Switch, Link, Redirect} from 'react-router-dom';
-
+import PostProduct from "./postProduct";
+import DeleteProduct from "./deleteProduct";
+import { Button } from "react-bootstrap";
 
 function ProductTable(props) {
         console.log(props);
@@ -12,7 +14,8 @@ function ProductTable(props) {
                 <img src={product.main_image}  width="150" height="100"/>
                 <td>{product.name}</td>
                 <td>${product.price}.00</td>
-                <Link to={{pathname: '/product', query:{product:product}}}>Details</Link>
+                <Button><Link to={{pathname: '/product', query:{product:product}}}>Details</Link></Button>
+                <DeleteProduct deleteProduct={props.deleteProduct} productId={product.id} />
             </tr>
         });
         return (
@@ -29,6 +32,10 @@ function ProductTable(props) {
                         {products}
                     </tbody>
                 </Table>
+                <br/>
+                <div>
+                    <PostProduct user={props.user} createProducts={props.createProducts} />
+                </div>
             </div>
         )
     
