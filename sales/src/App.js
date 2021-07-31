@@ -29,6 +29,8 @@ function App() {
   const [readyOrders, setReadyOrders] = useState([]);
   const [shippedOrders, setShippedOrders] = useState([]);
   const [unpaidOrders, setUnpaidOrders] = useState([]);
+  const [allSizes, setAllSizes] = useState([]);
+  const [allColors, setAllColors] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -36,6 +38,8 @@ function App() {
     getAllProducts();
     getCartsByUserId(user.id);
     getAllOrders();
+    getAllSizes();
+    getAllColors();
   },[]);
 
   let getToken = () => {
@@ -304,6 +308,49 @@ function App() {
     }
   }
 
+  let getAllSizes = async () => {
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/sales/sizes/`);
+      setAllSizes(response.data);
+      console.log(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let createSize = async (size) => {
+    try{
+      let response = await axios.post(`http://127.0.0.1:8000/sales/sizes/`, size);
+      console.log(response.data)
+      console.log("created")
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let getAllColors = async () => {
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/sales/colors/`);
+      setAllColors(response.data);
+      console.log(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+  let createColor = async (color) => {
+    try{
+      let response = await axios.post(`http://127.0.0.1:8000/sales/colors/`, color);
+      console.log(response.data)
+      console.log("created")
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
@@ -316,7 +363,7 @@ function App() {
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
         productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
-         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} getProductReviews={getProductReviews} 
+         <Route path='/' render={props => <ProductTable {...props} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
          getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
          createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
         </Switch>

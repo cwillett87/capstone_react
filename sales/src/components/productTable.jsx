@@ -5,16 +5,27 @@ import PostProduct from "./postProduct";
 import DeleteProduct from "./deleteProduct";
 import { Button } from "react-bootstrap";
 import ViewCart from "./viewCart";
-import CartPage from "./addToCartPage"
+import AddColor from "./addColor";
+import AddSize from "./addSize";
 
 function ProductTable(props) {
         console.log(props);
 
         const [postVisible, setPostVisible] = useState(false);
         const [cartVisible, setCartVisible] = useState(false);
+        const [colorVisible, setColorVisible] = useState(false);
+        const [sizeVisible, setSizeVisible] = useState(false);
 
         let showPostForm = () =>{
             setPostVisible(!postVisible);
+        }
+
+        let showSizeForm = () =>{
+            setSizeVisible(!sizeVisible);
+        }
+
+        let showColorForm = () =>{
+            setColorVisible(!colorVisible);
         }
 
         let showCart = () =>{
@@ -72,6 +83,18 @@ function ProductTable(props) {
                     </tbody>
                 </Table>
                 <br/>
+                <Button onClick={()=>{
+                showSizeForm();
+            }}>Add Size</Button><br/><br/><br/>
+            {sizeVisible? (
+                    <AddSize allSizes={props.allSizes} createSize={props.createSize} />
+                    ):null}
+                    <Button onClick={()=>{
+                showColorForm();
+            }}>Add Color</Button><br/><br/><br/>
+            {colorVisible? (
+                    <AddColor createColor={props.createColor} allColors={props.allColors} />
+                    ):null}
                 <div>
                 <Button onClick={()=>{
                 showPostForm();
