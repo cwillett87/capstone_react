@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 import Image from './image';
 import UpdateProduct from './updateProduct';
 import { Button } from "react-bootstrap";
-
+import Review from './reviews'
 
 
 function ProductPage(props) {
@@ -38,12 +38,14 @@ let showUpdateForm = () => {
                             <tr>
                                 <td>{props.history.location.query.product.name}</td>
                                 <td>{props.history.location.query.product.description}</td>
-                                <td>${props.history.location.query.product.price}.00</td>
+                                <td>${props.history.location.query.product.price}</td>
                                 <td>{props.history.location.query.product.ave_rating}</td>
                                 <td>Out of Stock</td>
                                 </tr>
                         </tbody>
                     </Table>
+                    <br/>
+                    <Review user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     <br/>
                     <div>
                     <Button onClick={()=>{
@@ -76,12 +78,14 @@ let showUpdateForm = () => {
                     <tr>
                         <td>{props.history.location.query.product.name}</td>
                         <td>{props.history.location.query.product.description}</td>
-                        <td>${props.history.location.query.product.price}.00</td>
+                        <td>${props.history.location.query.product.price}</td>
                         <td>{props.history.location.query.product.ave_rating}</td>
                         <td>{props.history.location.query.product.quantity}</td>
                         </tr>
                 </tbody>
             </Table>
+            <br/>
+                <Review user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
             <br/>
             <div>
             <Button onClick={()=>{

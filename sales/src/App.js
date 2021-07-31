@@ -23,6 +23,7 @@ function App() {
   const [filteredProductIds, setFilteredProductIds] = useState([]);
   const [orderTotal, setOrderTotal] = useState([]);
   const [productIds, setProductIds] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -235,6 +236,28 @@ function App() {
     }
   }
 
+  let getProductReviews = async (productId) => {
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/sales/reviews/${productId}/`);
+      setReviews(response.data);
+      console.log(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let createReview = async (review) => {
+    try{
+      let response = await axios.post(`http://127.0.0.1:8000/sales/reviews/`, review);
+      console.log(response.data)
+      console.log("created review")
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
@@ -244,9 +267,9 @@ function App() {
       <Route path='/cart' render={props => <AddCart {...props} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
-        <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
-        productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user}/>}/>
-         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} 
+        <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
+        productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
+         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} getProductReviews={getProductReviews} 
          getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
          createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
         </Switch>
