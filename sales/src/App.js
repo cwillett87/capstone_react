@@ -10,6 +10,7 @@ import ProductTable from './components/productTable';
 import ProductPage from './components/productPage';
 import AddCart from './components/addCart';
 import DisplayCartPage from './components/viewCartPage';
+import DisplayOrders from './components/displayOders';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -24,12 +25,17 @@ function App() {
   const [orderTotal, setOrderTotal] = useState([]);
   const [productIds, setProductIds] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [allOrders, setAllOrders] = useState([]);
+  const [readyOrders, setReadyOrders] = useState([]);
+  const [shippedOrders, setShippedOrders] = useState([]);
+  const [unpaidOrders, setUnpaidOrders] = useState([]);
 
   useEffect(() => {
     getAllUsers();
     getToken();
     getAllProducts();
     getCartsByUserId(user.id);
+    getAllOrders();
   },[]);
 
   let getToken = () => {
@@ -258,12 +264,53 @@ function App() {
     }
   }
 
+  let getAllOrders = async () => {
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/sales/orders/`);
+      setAllOrders(response.data);
+      console.log(response.data)
+      getReadyOrders(response.data)
+      getShippedOrders(response.data)
+      getUnpaidOrders(response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  let getReadyOrders =(orders) =>{
+    let filtered = orders.filter(order => order.checked_Out == true && 
+    order.tracking_number == 0)
+    setReadyOrders(filtered)
+  }
+
+  let getShippedOrders =(orders) =>{
+    let filtered = orders.filter(order => order.tracking_number > 0)
+    setShippedOrders(filtered)
+  }
+
+  let getUnpaidOrders =(orders) =>{
+    let filtered = orders.filter(order => order.checked_Out == false)
+    setUnpaidOrders(filtered)
+  }
+
+  let updateOrder = async (id, order) => {
+    try{
+      let response = await axios.put(`http://127.0.0.1:8000/sales/orders/${id}/`, order);
+      console.log("updated"+response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <div>
         <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} />
         <Switch>
-    <Route path='/show-cart' render={props => <DisplayCartPage {...props} createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
+        <Route path='/orders' render={props => <DisplayOrders {...props} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
+      <Route path='/show-cart' render={props => <DisplayCartPage {...props} createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
       <Route path='/cart' render={props => <AddCart {...props} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
