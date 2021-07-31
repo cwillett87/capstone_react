@@ -24,6 +24,17 @@ function ProductTable(props) {
         
         let products = props.allProducts.map((product) => {
             console.log(product)
+            if(product.quantity === 0){
+                return <tr key={product.id}>
+                <img src={product.main_image}  width="150" height="100"/>
+                <td>{product.name}</td>
+                <td>${product.price}.00</td>
+                <Button><Link to={{pathname: '/product', query:{product:product}}}>Details</Link></Button>
+                <Button active variant="danger">(Out of Stock)</Button>
+                <DeleteProduct deleteProduct={props.deleteProduct} productId={product.id} />
+            </tr>
+         
+            }else{
             return <tr key={product.id}>
                 <img src={product.main_image}  width="150" height="100"/>
                 <td>{product.name}</td>
@@ -32,7 +43,8 @@ function ProductTable(props) {
                 <Button><Link to={{pathname: '/cart', query:{product:product}}}>Add</Link></Button>
                 <DeleteProduct deleteProduct={props.deleteProduct} productId={product.id} />
             </tr>
-        });
+        }
+    })
         return (
             <div>
                 <div>

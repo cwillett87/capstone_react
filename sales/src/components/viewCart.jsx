@@ -2,18 +2,23 @@ import React, {useEffect, useState} from 'react';
 import { Button } from 'react-bootstrap';
 import Table from "react-bootstrap/Table";
 import DeleteFromCart from './deleteCart';
+import Stripe from 'stripe';
 
 
 function ViewCart(props){
     console.log(props.userCarts)
     const [values, setValues] = useState([]);
     const [redirect,setRedirect] = useState(false);
+
     if (props.userCarts === undefined) {
         return(
             null
         );
     }
     else {
+        
+
+
         async function addOrder() {
             const order = {...values, ['user_Id']:props.user.id , ['tracking_number']: "0", ['total']:props.orderTotal, ['checked_Out']:false }
             props.createOrder(order);

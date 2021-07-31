@@ -22,6 +22,7 @@ function App() {
   const [userCarts, setUserCarts] = useState([]);
   const [filteredProductIds, setFilteredProductIds] = useState([]);
   const [orderTotal, setOrderTotal] = useState([]);
+  const [productIds, setProductIds] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -106,9 +107,11 @@ function App() {
       setOrderTotal(total)
   }
 
-  let cartProducts = (productIds) => {
-    for(let i =0; i < productIds.length; i++)
-    getProductById(productIds[i])
+  let cartProductIds = (carts) => {
+    let productIds = carts.map((product) =>
+    (product.product_Id.id));
+    setProductIds(productIds)
+    console.log(productIds)
   }
 
   let logoutUser = () =>{
@@ -184,7 +187,8 @@ function App() {
         let response = await axios.get(`http://127.0.0.1:8000/sales/shopping-carts/${userId}/`);
         console.log(response.data)
         setUserCarts(response.data)
-        productIdToList(response.data); 
+        productIdToList(response.data);
+        cartProductIds(response.data) 
       }
       catch(err) {
         console.log(err);
@@ -210,6 +214,16 @@ function App() {
     }
   }
 
+  let updateCart = async (id, cart) => {
+    try{
+      let response = await axios.put(`http://127.0.0.1:8000/sales/shopping-carts-update/${id}/`, cart);
+      console.log("updated"+response.data)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   let createOrder = async (order) => {
     try{
       let response = await axios.post(`http://127.0.0.1:8000/sales/orders/`, order);
@@ -227,7 +241,7 @@ function App() {
         <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} />
         <Switch>
     <Route path='/show-cart' render={props => <DisplayCartPage {...props} createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
-        <Route path='/cart' render={props => <AddCart {...props} user={user} createCart={createCart} />}/>
+      <Route path='/cart' render={props => <AddCart {...props} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} getProductById={getProductById} productById={productById} 
