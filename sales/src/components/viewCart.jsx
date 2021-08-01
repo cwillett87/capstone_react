@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import Table from "react-bootstrap/Table";
 import DeleteFromCart from './deleteCart';
 import Stripe from 'stripe';
+import emailjs from 'emailjs-com';
 
 
 function ViewCart(props){
@@ -16,7 +17,6 @@ function ViewCart(props){
         );
     }
     else {
-        
 
 
         async function addOrder() {
