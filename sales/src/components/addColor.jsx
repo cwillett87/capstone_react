@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
 import useForm from './useForm';
 import Form from 'react-bootstrap/Form';
-import { Table } from 'react-bootstrap';
+import {Table, Container} from "react-bootstrap";
 
 const AddColor = (props) => {
     const {values, handleChange, handleSubmit} = useForm(colorAdd);
@@ -25,6 +25,7 @@ const AddColor = (props) => {
     return(
         <div>
             {!redirect ? 
+            <Container>
             <Form onSubmit={handleSubmit}>
                 <Table>
             <thead>
@@ -48,6 +49,7 @@ const AddColor = (props) => {
                 <button type='submit'>Add</button>
                 
             </Form>
+            </Container>
             : <Redirect to='/'/>}
         </div>
     )

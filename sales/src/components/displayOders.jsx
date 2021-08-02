@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
-import Table from "react-bootstrap/Table";
+import {Table, Container} from "react-bootstrap";
 import Tracking from './updateTrackking'
 
 function DisplayOrders(props){
@@ -37,6 +37,7 @@ function DisplayOrders(props){
     return(
         <div>
              <br/>
+             <Container>
             <h4>Unpaid Orders</h4>
             <Table>
                 <thead>
@@ -51,7 +52,9 @@ function DisplayOrders(props){
                         {unpaid}
                 </tbody>
             </Table>
+            </Container>
             <br/>
+            <Container>
             <h4>Orders ready to ship</h4>
             <Table>
                 <thead>
@@ -66,8 +69,9 @@ function DisplayOrders(props){
                         {ready}
                 </tbody>
             </Table>
-            
+            </Container>
             <br/>
+            <Container>
             <h4>Shipped Orders</h4>
             <Table>
                 <thead>
@@ -82,6 +86,7 @@ function DisplayOrders(props){
                         {shipped}
                 </tbody>
             </Table>
+            </Container>
         </div>
     )
     }

@@ -11,6 +11,8 @@ import ProductPage from './components/productPage';
 import AddCart from './components/addCart';
 import DisplayCartPage from './components/viewCartPage';
 import DisplayOrders from './components/displayOders';
+import DisplaySales from './components/salesPage';
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -29,8 +31,13 @@ function App() {
   const [readyOrders, setReadyOrders] = useState([]);
   const [shippedOrders, setShippedOrders] = useState([]);
   const [unpaidOrders, setUnpaidOrders] = useState([]);
+  const [paidOrders, setPaidOrders] = useState([]);
   const [allSizes, setAllSizes] = useState([]);
   const [allColors, setAllColors] = useState([]);
+  const [sales, setSales] = useState([]);
+  const [salesTotal, setSalesTotal] = useState([]);
+  const [productSales, setProductSales] = useState([]);
+  const [cartIds, setCartIds] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -118,6 +125,12 @@ function App() {
       setOrderTotal(total)
   }
 
+  let cartsToList = (carts) =>{
+    let ids = carts.map((id)=>
+    (id.id))
+    setCartIds(ids)
+}
+
   let cartProductIds = (carts) => {
     let productIds = carts.map((product) =>
     (product.product_Id.id));
@@ -199,7 +212,8 @@ function App() {
         console.log(response.data)
         setUserCarts(response.data)
         productIdToList(response.data);
-        cartProductIds(response.data) 
+        cartProductIds(response.data)
+        cartsToList(response.data) 
       }
       catch(err) {
         console.log(err);
@@ -276,6 +290,7 @@ function App() {
       getReadyOrders(response.data)
       getShippedOrders(response.data)
       getUnpaidOrders(response.data)
+      gePaidOrders(response.data)
     }
     catch(err) {
       console.log(err);
@@ -296,6 +311,24 @@ function App() {
   let getUnpaidOrders =(orders) =>{
     let filtered = orders.filter(order => order.checked_Out == false)
     setUnpaidOrders(filtered)
+  }
+
+  let gePaidOrders =(orders) =>{
+    let filtered = orders.filter(order => order.checked_Out == true)
+    setPaidOrders(filtered)
+    totalSales(filtered)
+  }
+
+  let totalSales = (orders) => {
+    let total = 0
+    let orderTotals = orders.map((order) => 
+      (order.total))
+      setSales(orderTotals)
+      console.log(orderTotals)
+      for(let i =0; i < orderTotals.length;i++)
+      total += orderTotals[i]
+      console.log(total)
+      setSalesTotal(total)
   }
 
   let updateOrder = async (id, order) => {
@@ -356,8 +389,9 @@ function App() {
       <div>
         <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} />
         <Switch>
+        <Route path='/sales' render={props => <DisplaySales {...props} sales={sales} productSales={productSales} userCarts={userCarts} allProducts={allProducts} salesTotal={salesTotal} paidOrders={paidOrders} allOrders={allOrders} />}/>
         <Route path='/orders' render={props => <DisplayOrders {...props} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
-      <Route path='/show-cart' render={props => <DisplayCartPage {...props} createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
+      <Route path='/show-cart' render={props => <DisplayCartPage {...props} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
       <Route path='/cart' render={props => <AddCart {...props} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>

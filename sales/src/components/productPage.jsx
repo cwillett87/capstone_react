@@ -3,7 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import Image from './image';
 import UpdateProduct from './updateProduct';
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Review from './reviews'
 
 
@@ -21,9 +21,11 @@ let showUpdateForm = () => {
         if(props.history.location.query.product.quantity === 0){
             return(
                 <div>
+                    <Container>
                     <div>
                         <Image productImages={props.productImages} getImages={props.getImages} productId={props.history.location.query.product.id} />
                     </div>
+                    <Container>
                   <Table>
                         <thead>
                             <tr>
@@ -44,6 +46,7 @@ let showUpdateForm = () => {
                                 </tr>
                         </tbody>
                     </Table>
+                    </Container>
                     <br/>
                     <Review user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     <br/>
@@ -56,6 +59,7 @@ let showUpdateForm = () => {
                         product={props.history.location.query.product} user={props.user}/>
                         ):null}
                     </div>
+                    </Container>
                 </div>
             );
         }else{
@@ -64,6 +68,7 @@ let showUpdateForm = () => {
             <div>
                 <Image productImages={props.productImages} getImages={props.getImages} productId={props.history.location.query.product.id} />
             </div>
+            <Container>
           <Table>
                 <thead>
                     <tr>
@@ -84,6 +89,7 @@ let showUpdateForm = () => {
                         </tr>
                 </tbody>
             </Table>
+            </Container>
             <br/>
                 <Review user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
             <br/>

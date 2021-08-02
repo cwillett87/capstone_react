@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import useForm from './useForm';
 import {withRouter, Redirect} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
+import { Button, Container } from "react-bootstrap";
 
 function Review(props){
 
@@ -54,6 +55,7 @@ function Review(props){
             <div>
                 {!redirect ?
                 <div>
+                    <Container>
                 <Table>
                 <thead>
                     <tr>
@@ -68,8 +70,10 @@ function Review(props){
                     </tr>
                 </tbody>
             </Table>
+            </Container>
             <br/>
             <br/>
+            <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Please write a review</h2>
                 <label>Rating:
@@ -92,6 +96,7 @@ function Review(props){
                 <button type='submit'>Submit</button>
                 
             </Form>
+            </Container>
             </div>
             : <Redirect to='/'/>}
             </div>
@@ -108,6 +113,7 @@ function Review(props){
         <div>
             {!redirect ?
                 <div>
+                    <Container>
             <Table>
                 <thead>
                     <tr>
@@ -119,8 +125,10 @@ function Review(props){
                     {reviews}
                 </tbody>
             </Table>
+            </Container>
             <br/>
             <br/>
+            <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Please write a review</h2>
                 <label>Rating:
@@ -143,6 +151,7 @@ function Review(props){
                 <button type='submit'>Submit</button>
                 
             </Form>
+            </Container>
             </div>
             : <Redirect to='/'/>}
         </div>

@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import {withRouter, Switch, Link, Redirect} from 'react-router-dom';
 import PostProduct from "./postProduct";
 import DeleteProduct from "./deleteProduct";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import ViewCart from "./viewCart";
 import AddColor from "./addColor";
 import AddSize from "./addSize";
@@ -70,6 +70,7 @@ function ProductTable(props) {
                     <ViewCart user={props.user} products={props.allProducts} userCarts={props.userCarts} deleteCart={props.deleteCart} />
                     ):null}
                 </div>
+                <Container>
                 <Table>
                     <thead>
                         <tr>
@@ -82,6 +83,7 @@ function ProductTable(props) {
                         {products}
                     </tbody>
                 </Table>
+                </Container>
                 <br/>
                 <Button onClick={()=>{
                 showSizeForm();

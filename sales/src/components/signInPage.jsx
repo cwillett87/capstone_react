@@ -14,6 +14,7 @@ let showForm = () =>{
 
     return(
         <div>
+            <Container>
             <h1>Please register if you don't have an account</h1>
             <Button onClick={()=>{
                 showForm();
@@ -24,6 +25,7 @@ let showForm = () =>{
             
             <h1>Login</h1>
             <LoginForm loginCurrentUser={props.loginCurrentUser} currentuser={props.getCurrentUser} />
+            </Container>
         </div>
     )
 }

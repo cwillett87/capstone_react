@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
 import useForm from './useForm';
-import Form from 'react-bootstrap/Form';
+import {Form, Container} from 'react-bootstrap';
 import emailjs from 'emailjs-com';
 import{ init } from 'emailjs-com';
 
@@ -39,6 +39,7 @@ const Tracking = (props) => {
     return(
         <div>
             {!redirect ? 
+            <Container>
             <Form onSubmit={handleSubmit}>
             <label>Tracking:
                     <input
@@ -52,6 +53,7 @@ const Tracking = (props) => {
                 <button type='submit'>Add</button>
                 
             </Form>
+            </Container>
             : <Redirect to='/'/>}
         </div>
     )

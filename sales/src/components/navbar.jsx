@@ -12,6 +12,7 @@ const NavbarOne = (props) => (
         <Nav.Link href="/" onClick={()=>{props.logoutUser()}}>Logout</Nav.Link>
         <Nav.Link as={Link} to="/show-cart">View Cart</Nav.Link>
         <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
+        <Nav.Link as={Link} to="/sales">Sales</Nav.Link>
       </Nav>
     </Navbar.Collapse>
 </Navbar>

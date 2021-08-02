@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
+import {Form, Container } from 'react-bootstrap';
 import useForm from './useForm';
 import {withRouter, Redirect} from 'react-router-dom';
 
@@ -24,6 +24,7 @@ function UpdateProduct(props) {
     return(
         <div>
             {!redirect ? 
+            <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Update product</h2>
             <label>Product Name:
@@ -79,6 +80,7 @@ function UpdateProduct(props) {
                 <button type='submit'>Update</button>
                 
             </Form>
+            </Container>
             : <Redirect to='/'/>}
         </div>
     )

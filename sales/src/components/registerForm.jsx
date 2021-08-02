@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
 import useForm from './useForm';
 import Form from 'react-bootstrap/Form'
+import { Button, Container } from "react-bootstrap";
 
 const RegisterForm = (props) => {
     const {values, handleChange, handleSubmit} = useForm(createUser);
@@ -19,6 +20,7 @@ const RegisterForm = (props) => {
     return(
         <div>
             {!redirect ?
+            <Container>
             <Form onSubmit={handleSubmit}>
             <label>Username:
                     <input
@@ -95,6 +97,7 @@ const RegisterForm = (props) => {
                 
                 <button type='submit'>Register</button>
             </Form>
+            </Container>
             : <Redirect to='/'/>}
         </div>
     )

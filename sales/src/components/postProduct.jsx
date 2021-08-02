@@ -4,6 +4,7 @@ import useForm from './useForm';
 import {withRouter, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import ImageUploading from "react-images-uploading";
+import { Container} from "react-bootstrap";
 
 function PostProduct(props) {
     const {values, handleChange, handleSubmit} = useForm(addProduct);
@@ -71,6 +72,7 @@ function PostProduct(props) {
     
             <br/>
             <br/>
+            <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Add a product</h2>
             <label>Product Name:
@@ -126,6 +128,7 @@ function PostProduct(props) {
                 <button type='submit'>Add Product</button>
                 
             </Form>
+            </Container>
             </div>
             : <Redirect to='/'/>}
         </div>
