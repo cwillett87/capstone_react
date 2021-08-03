@@ -40,6 +40,7 @@ const Tracking = (props) => {
         <div>
             {!redirect ? 
             <Container>
+                <center>
             <Form onSubmit={handleSubmit}>
             <label>Tracking:
                     <input
@@ -50,9 +51,10 @@ const Tracking = (props) => {
                     />
                 </label>
                 
-                <button type='submit'>Add</button>
+                <button className="move" type='submit'>Add</button>
                 
             </Form>
+            </center>
             </Container>
             : <Redirect to='/'/>}
         </div>

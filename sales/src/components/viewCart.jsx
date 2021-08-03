@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Button } from 'react-bootstrap';
 import {Table, Container} from "react-bootstrap";
 import DeleteFromCart from './deleteCart';
-import Stripe from 'stripe';
+import StripeCheckout from 'react-stripe-checkout';
 import emailjs from 'emailjs-com';
 import{ init } from 'emailjs-com';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,13 +17,6 @@ function ViewCart(props){
     toast.configure()
         const notify = () => toast("Order Received");
 
-    if (props.userCarts === undefined) {
-        return(
-            null
-        );
-    }
-    else {
-
         let order = props.userCarts.map((cart)=>{
             return`
                 Product:${cart.product_Id.name},
@@ -34,6 +27,7 @@ function ViewCart(props){
         
         })
         console.log(order)
+
         const mail ={
             'order': order,
             'address': props.user.address,
@@ -56,7 +50,7 @@ function ViewCart(props){
             const order = {...values, ['user_Id']:props.user.id , 
             ['tracking_number']: "0", 
             ['total']:props.orderTotal, 
-            ['checked_Out']:false,
+            ['checked_Out']:true,
             ['shopping_carts']: props.cartIds
         }
             props.createOrder(order);
@@ -64,24 +58,37 @@ function ViewCart(props){
             
         }
 
+        let handleToken = (token, addresses) =>{
+            console.log({token, addresses})
+            addOrder()
+             notify()
+            notifyCustomer(mail)
+        }
+    
+        
+        
+
         let carts = props.userCarts.map((cart) => {
             console.log(cart);
             return <tr key={cart.id}>
-                <img src={cart.product_Id.main_image}  width="150" height="100"/>
+                <td><center><img src={cart.product_Id.main_image}  width="150" height="100"/></center></td>
                 <td>{cart.product_Id.name}</td>
                 <td>{cart.product_Id.price}</td>
                 <td>{cart.product_Id.ave_rating}</td>
                 <td>{cart.color_Id}</td>
                 <td>{cart.size_Id}</td>
                 <td>{cart.quantity}</td>
-                <DeleteFromCart cartid={cart.id} deleteCart={props.deleteCart}/>
+                <td><center><DeleteFromCart cartid={cart.id} deleteCart={props.deleteCart}/></center></td>
                 </tr>
-        });
+        })
         return(
             <div>
                 <div>
+                <br/>
+                <br/>
+                <br/>
                     <Container>
-                <Table>
+                    <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th></th>
@@ -91,19 +98,27 @@ function ViewCart(props){
                             <th>Color</th>
                             <th>Size</th>
                             <th>Quantity</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {carts}
                     </tbody>
                 </Table>
+                <br/>
+                <center>
                 <h1>Total:${props.orderTotal}</h1>
-                <Button onClick={()=>(addOrder(), notify(), notifyCustomer(mail))} >Order</Button>
+                <StripeCheckout stripeKey={props.newKey.publicKey} token={handleToken} billingAddress 
+                shippingAddress
+                amount={props.orderTotal * 100}
+                
+                />
+                </center>
                 </Container>
                 </div>
             </div>
         )
-    }
+    
 }
 
 export default ViewCart;

@@ -38,6 +38,8 @@ function App() {
   const [salesTotal, setSalesTotal] = useState([]);
   const [productSales, setProductSales] = useState([]);
   const [cartIds, setCartIds] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [newKey, setNewKey] = useState([]);
 
   useEffect(() => {
     getAllUsers();
@@ -47,6 +49,7 @@ function App() {
     getAllOrders();
     getAllSizes();
     getAllColors();
+    getKey();
   },[]);
 
   let getToken = () => {
@@ -67,6 +70,7 @@ function App() {
       let response = await axios.get(`http://127.0.0.1:8000/sales/user/`);
       console.log(response.data)
       setUsers(response.data)
+      
     }
     catch(err) {
       console.log(err);
@@ -92,6 +96,9 @@ function App() {
       localStorage.setItem('token', response.data.auth_token);
       console.log(token)
       getCurrentUser();
+      setLoggedIn(true)
+      getKey()
+      console.log(newKey)
     }
     catch(err) {
       console.log(err);
@@ -384,15 +391,46 @@ function App() {
     }
   }
 
+  let getKey = async () =>{
+    try{
+      let response = await axios.get(`http://127.0.0.1:8000/sales/config/`);
+      setNewKey(response.data);
+      console.log(response.data.publicKey)
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+  
+
+  if(loggedIn===false){
+    return (
+      <div>
+        <div>
+          <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} loggedIn={loggedIn} />
+          <Switch>
+          <Route path='/login' render={props => <SignIn {...props} user={user} loggedIn={loggedIn} registerUser={registerUser} users={users}
+          loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
+          <Route path='/product' render={props => <ProductPage {...props} loggedIn={loggedIn} createReview={createReview} getProductById={getProductById} productById={productById} 
+          productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
+           <Route path='/' render={props => <ProductTable {...props} loggedIn={loggedIn} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
+           getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
+           createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
+          </Switch>
+        </div>
+      </div>
+    );
+  }
+  else{
   return (
     <div>
       <div>
-        <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} />
+        <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} loggedIn={loggedIn} />
         <Switch>
         <Route path='/sales' render={props => <DisplaySales {...props} sales={sales} productSales={productSales} userCarts={userCarts} allProducts={allProducts} salesTotal={salesTotal} paidOrders={paidOrders} allOrders={allOrders} />}/>
         <Route path='/orders' render={props => <DisplayOrders {...props} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
-      <Route path='/show-cart' render={props => <DisplayCartPage {...props} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
-      <Route path='/cart' render={props => <AddCart {...props} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
+      <Route path='/show-cart' render={props => <DisplayCartPage {...props} newKey={newKey} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
+      <Route path='/cart' render={props => <AddCart {...props} newKey={newKey} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
@@ -404,6 +442,7 @@ function App() {
       </div>
     </div>
   );
+  }
 }
 
 export default App;

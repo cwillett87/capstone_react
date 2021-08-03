@@ -17,7 +17,9 @@ const LoginForm = (props) => {
         <div>
             {!redirect ? 
             <Form onSubmit={handleSubmit}>
+                <br/>
             <label>Email:
+            <br/>
                     <input
                         type='text'
                         name='email'
@@ -25,7 +27,10 @@ const LoginForm = (props) => {
                         value={values.email}
                     />
                 </label>
+                <br/>
+                <br/>
                 <label>Password:
+                <br/>
                     <input
                         type='text'
                         name='password'
@@ -33,7 +38,8 @@ const LoginForm = (props) => {
                         value={values.password}
                     />
                 </label>
-                
+                <br/>
+                <br/>
                 <button type='submit'>Login</button>
                 
             </Form>

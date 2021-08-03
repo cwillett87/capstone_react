@@ -34,19 +34,25 @@ function Image(props){
         }
         
     return(
-        <div className='row row-spacer'>
+        <center>
+            <br/>
+        <div>
                 <div className="col-md-2">
                 <button className="cycle" onClick={() => goToPreviousCard()}>Previous</button>
                 </div>
-                <div className=' col-md-2'>
+                <br/>
+                <div className=' col-md'>
                     <div>
-                    <img src={props.productImages[cardNumber].path}  width="150" height="100"/>
+                    <img src={props.productImages[cardNumber].path}  width="250" height="200"/>
                     </div>
                 </div>
+                <br/>
                 <div className="col-md-2 ml-10">
                     <button className="cycle" onClick={() => goToNextCard()}>Next</button>
                 </div>
             </div>
+            <br/>
+        </center>
     )
     }
 }

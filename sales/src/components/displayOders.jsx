@@ -39,7 +39,7 @@ function DisplayOrders(props){
              <br/>
              <Container>
             <h4>Unpaid Orders</h4>
-            <Table>
+            <Table bordered variant='dark'>
                 <thead>
                     <tr>
                         <th>User</th>
@@ -56,13 +56,14 @@ function DisplayOrders(props){
             <br/>
             <Container>
             <h4>Orders ready to ship</h4>
-            <Table>
+            <Table bordered variant='dark'>
                 <thead>
                     <tr>
                         <th>User</th>
                         <th>Tracking</th>
                         <th>Total</th>
                         <th>status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,7 +74,7 @@ function DisplayOrders(props){
             <br/>
             <Container>
             <h4>Shipped Orders</h4>
-            <Table>
+            <Table bordered variant='dark'>
                 <thead>
                     <tr>
                         <th>User</th>

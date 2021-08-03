@@ -4,7 +4,7 @@ import useForm from './useForm';
 import Form from 'react-bootstrap/Form'
 import { Button, Container } from "react-bootstrap";
 
-const RegisterForm = (props) => {
+const CustomerRegister = (props) => {
     const {values, handleChange, handleSubmit} = useForm(createUser);
     const [redirect,setRedirect] = useState(false);
 
@@ -12,7 +12,7 @@ const RegisterForm = (props) => {
         console.log(values.phone);
         let string = values.phone;
         let number = parseInt(string);
-        const addUser = {...values, ['phone']: number}
+        const addUser = {...values, ['phone']: number, ['role']: 'customer' }
         console.log(addUser);
         props.registerUser(addUser);
     }
@@ -32,8 +32,7 @@ const RegisterForm = (props) => {
                         value={values.username}
                     />
                 </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>First Name:
                 <br/>
                     <input
@@ -43,8 +42,7 @@ const RegisterForm = (props) => {
                         value={values.first_name}
                     />
                 </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>Last Name:
                 <br/>
                     <input
@@ -54,8 +52,7 @@ const RegisterForm = (props) => {
                         value={values.definition}
                     />
                 </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>Phone:
                 <br/>
                     <input
@@ -65,8 +62,7 @@ const RegisterForm = (props) => {
                         value={values.phone}
                     />
                 </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>Address:
                 <br/>
                     <input
@@ -76,19 +72,7 @@ const RegisterForm = (props) => {
                         value={values.address}
                     />
                 </label>
-                <br/>
-                <br/>
-                <label>Role:
-                <br/>
-                    <input
-                        type='text'
-                        name='role'
-                        onChange={handleChange}
-                        value={values.role}
-                    />
-                </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>Email:
                 <br/>
                     <input
@@ -98,8 +82,7 @@ const RegisterForm = (props) => {
                         value={values.email}
                     />
                 </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>Password:
                 <br/>
                     <input
@@ -109,8 +92,7 @@ const RegisterForm = (props) => {
                         value={values.password}
                     />
                 </label>
-                <br/>
-                <br/>
+                <br/><br/>
                 <label>Retype Password:
                 <br/>
                     <input
@@ -129,4 +111,4 @@ const RegisterForm = (props) => {
     )
 };
 
-export default withRouter (RegisterForm);
+export default withRouter (CustomerRegister);

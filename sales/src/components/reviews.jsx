@@ -18,10 +18,12 @@ function Review(props){
         const newReview = {...values, ['product_Id']: props.product.id, ['rating']: nRating}
         props.createReview(newReview)
         if(props.product.ave_rating ===0){
+            let string = props.product.price;
+            let number = parseInt(string)
             const newProduct = {['creator_Id']: props.user.id, 
                 ['name']: props.product.name,
                 ['description']: props.product.description,
-                ['price']: props.product.price, 
+                ['price']: number+0.99, 
                 ['ave_rating']: nRating, 
                 ['quantity']: props.product.quantity,
                 ['main_image']:props.product.main_image}
@@ -29,6 +31,8 @@ function Review(props){
             props.updateProduct(props.product.id, newProduct);
         }
         else{
+            let string = props.product.price;
+            let number = parseInt(string)
             let total = 0 + nRating
             let ratings = props.reviews.map((review)=>
             (review.rating))
@@ -37,26 +41,25 @@ function Review(props){
             total += ratings[i]
             let length = ratings.length + 1
             let average = total/length
+            let rounded = Math.round((average + Number.EPSILON)*100)/100
             console.log(average)
             const newProduct = {['creator_Id']: props.user.id, 
             ['name']: props.product.name,
             ['description']: props.product.description,
-            ['price']: props.product.price, 
-            ['ave_rating']: average, 
+            ['price']: number+0.99, 
+            ['ave_rating']: rounded, 
             ['quantity']: props.product.quantity,
             ['main_image']:props.product.main_image}
             console.log(newProduct)
         props.updateProduct(props.product.id, newProduct); 
         }
     }
-
+if(props.loggedIn===false){
     if(props.reviews.length === 1){
         return(
             <div>
-                {!redirect ?
-                <div>
                     <Container>
-                <Table>
+                <Table bordered variant='dark'>
                 <thead>
                     <tr>
                         <th>Rating</th>
@@ -71,34 +74,55 @@ function Review(props){
                 </tbody>
             </Table>
             </Container>
-            <br/>
-            <br/>
-            <Container>
-            <Form onSubmit={handleSubmit}>
-                <h2>Please write a review</h2>
-                <label>Rating:
-                    <input
-                        type='text'
-                        name='rating'
-                        onChange={handleChange}
-                        value={values.rating}
-                    />
-                </label>
-                <label>Review:
-                    <input
-                        type='text'
-                        name='review'
-                        onChange={handleChange}
-                        value={values.review}
-                    />
-                </label>
-
-                <button type='submit'>Submit</button>
-                
-            </Form>
-            </Container>
             </div>
-            : <Redirect to='/'/>}
+        )
+    }
+    else{
+        let reviews = props.reviews.map((review)=>{
+            return <tr>
+                <td>{review.rating}</td>
+                <td>{review.review}</td>
+            </tr>
+        })
+    return(
+        <div>
+                    <Container>
+            <Table bordered variant='dark'>
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {reviews}
+                </tbody>
+            </Table>
+            </Container>
+        </div>
+    )
+    } 
+}
+else{
+    if(props.reviews.length === 1){
+        return(
+            <div>
+                    <Container>
+                    <Table bordered variant='dark'>
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{props.reviews[0].rating}</td>
+                        <td>{props.reviews[0].review}</td>
+                    </tr>
+                </tbody>
+            </Table>
+            </Container>
             </div>
         )
     }
@@ -114,7 +138,7 @@ function Review(props){
             {!redirect ?
                 <div>
                     <Container>
-            <Table>
+                    <Table bordered variant='dark'>
                 <thead>
                     <tr>
                         <th>Rating</th>
@@ -131,6 +155,7 @@ function Review(props){
             <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Please write a review</h2>
+                <br/>
                 <label>Rating:
                     <input
                         type='text'
@@ -139,6 +164,8 @@ function Review(props){
                         value={values.rating}
                     />
                 </label>
+                <br/>
+                <br/>
                 <label>Review:
                     <input
                         type='text'
@@ -147,15 +174,18 @@ function Review(props){
                         value={values.review}
                     />
                 </label>
-
+                <br/>
+                <br/>
                 <button type='submit'>Submit</button>
-                
+                <br/>
             </Form>
+            <br/>
             </Container>
             </div>
             : <Redirect to='/'/>}
         </div>
     )
     }
+}
 }
 export default Review;

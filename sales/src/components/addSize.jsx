@@ -27,8 +27,8 @@ const AddSize = (props) => {
             {!redirect ? 
             <Container>
             <Form onSubmit={handleSubmit}>
-                <Table>
-            <thead>
+            <Table bordered variant='dark'>
+            <thead >
                 <tr>
                     <th>Sizes</th>
                 </tr>
@@ -38,6 +38,7 @@ const AddSize = (props) => {
             </tbody>
             </Table>
             <label>New Size:
+            <br/>
                     <input
                         type='text'
                         name='size'
@@ -45,10 +46,11 @@ const AddSize = (props) => {
                         value={values.size}
                     />
                 </label>
-                
+                <br/><br/>
                 <button type='submit'>Add</button>
                 
             </Form>
+            <br/>
             </Container>
             : <Redirect to='/'/>}
         </div>

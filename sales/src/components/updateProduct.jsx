@@ -27,7 +27,9 @@ function UpdateProduct(props) {
             <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Update product</h2>
+                <br/>
             <label>Product Name:
+            <br/>
                     <input
                         type='text'
                         name='name'
@@ -35,7 +37,10 @@ function UpdateProduct(props) {
                         value={values.name}
                     />
                 </label>
+                <br/>
+                <br/>
                 <label>Description:
+                <br/>
                     <input
                         type='text'
                         name='description'
@@ -43,7 +48,10 @@ function UpdateProduct(props) {
                         value={values.description}
                     />
                 </label>
+                <br/>
+                <br/>
                 <label>Price:
+                <br/>
                     <input
                         type='text'
                         name='price'
@@ -51,7 +59,10 @@ function UpdateProduct(props) {
                         value={values.price}
                     />
                 </label>
+                <br/>
+                <br/>
                 <label>Average Rating:
+                <br/>
                     <input
                         type='text'
                         name='ave_rating'
@@ -59,7 +70,10 @@ function UpdateProduct(props) {
                         value={values.ave_rating}
                     />
                 </label>
+                <br/>
+                <br/>
                 <label>Quantity:
+                <br/>
                     <input
                         type='text'
                         name='quantity'
@@ -67,8 +81,11 @@ function UpdateProduct(props) {
                         value={values.quantity}
                     />
                 </label>
-                <h6>Ex: images/(name.type)</h6>
+                <br/>
+                <br/>
+                
                 <label>Main Image Path:
+                <br/>
                     <input
                         type='text'
                         name='main_image'
@@ -76,7 +93,8 @@ function UpdateProduct(props) {
                         value= {values.main_image}
                     />
                 </label>
-                
+                <h6>Ex: images/(name.type)</h6>
+                <br/>
                 <button type='submit'>Update</button>
                 
             </Form>

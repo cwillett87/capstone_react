@@ -55,16 +55,18 @@ useEffect(() => {
         return(
             <div>
                 <br/>
-                <div style={{height:'300x',width:'500px'}}>
+                <center>
+                    <div style={{height:'300px',width:'500px'}}>
                         <Line data={chartData} options={{
                             responsive: true
                         }} />
                     </div>
                 <h4>Total Sales: ${props.salesTotal}</h4>
+                </center>
                  <br/>
                  <Container>
                 <h4>Product Sales</h4>
-                <Table>
+                <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -81,7 +83,7 @@ useEffect(() => {
                 <br/>
                 <Container>
                 <h4>Returns</h4>
-                <Table>
+                <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th>User</th>
@@ -98,7 +100,7 @@ useEffect(() => {
                 <br/>
                 <Container>
                 <h4>Inventory</h4>
-                <Table>
+                <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -139,16 +141,18 @@ useEffect(() => {
             return(
                 <div>
                     <br/>
+                    <center>
                     <div style={{height:'300px',width:'500px'}}>
                         <Line data={chartData} options={{
                             responsive: true
                         }} />
                     </div>
                 <h4>Total Sales: ${props.salesTotal}</h4>
+                </center>
                  <br/>
                  <Container>
                 <h4>Product Sales</h4>
-                <Table>
+                <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th>Product</th>
@@ -165,7 +169,7 @@ useEffect(() => {
                 <br/>
                 <Container>
                 <h4>Returns</h4>
-                <Table>
+                <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th>User</th>
@@ -182,7 +186,7 @@ useEffect(() => {
                 <br/>
                 <Container>
                 <h4>Inventory</h4>
-                <Table>
+                <Table bordered variant='dark'>
                     <thead>
                         <tr>
                             <th>Product</th>

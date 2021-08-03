@@ -5,6 +5,7 @@ import {withRouter, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import ImageUploading from "react-images-uploading";
 import { Container} from "react-bootstrap";
+import './css.css'
 
 function PostProduct(props) {
     const {values, handleChange, handleSubmit} = useForm(addProduct);
@@ -49,6 +50,8 @@ function PostProduct(props) {
         <div>
             {!redirect ? 
             <div>
+                <h2 >Add a product</h2>
+                <br/>
             {/* <input type='file' onChange={fileHandler}/>
             <button onClick={fileUploader} >Upload</button> */}
             <ImageUploading onChange={onChange} 
@@ -69,13 +72,13 @@ function PostProduct(props) {
         </div>
       )}
     </ImageUploading>
-    
-            <br/>
-            <br/>
+           
             <Container>
             <Form onSubmit={handleSubmit}>
-                <h2>Add a product</h2>
+                
+                <br/>
             <label>Product Name:
+            <br/>
                     <input
                         type='text'
                         name='name'
@@ -83,7 +86,9 @@ function PostProduct(props) {
                         value={values.name}
                     />
                 </label>
+                <br/> <br/>
                 <label>Description:
+                <br/>
                     <input
                         type='text'
                         name='description'
@@ -91,7 +96,9 @@ function PostProduct(props) {
                         value={values.description}
                     />
                 </label>
+                <br/> <br/>
                 <label>Price:
+                <br/>
                     <input
                         type='text'
                         name='price'
@@ -99,7 +106,9 @@ function PostProduct(props) {
                         value={values.price}
                     />
                 </label>
+                <br/> <br/>
                 <label>Average Rating:
+                <br/>
                     <input
                         type='text'
                         name='ave_rating'
@@ -107,7 +116,9 @@ function PostProduct(props) {
                         value={values.ave_rating}
                     />
                 </label>
+                <br/> <br/>
                 <label>Quantity:
+                <br/>
                     <input
                         type='text'
                         name='quantity'
@@ -115,8 +126,9 @@ function PostProduct(props) {
                         value={values.quantity}
                     />
                 </label>
-                <h6>Ex: images/(name.type)</h6>
+                <br/> <br/>
                 <label>Main Image Path:
+                <br/>
                     <input
                         type='text'
                         name='main_image'
@@ -124,10 +136,12 @@ function PostProduct(props) {
                         value= {values.main_image}
                     />
                 </label>
+                <h6 className='red' >Ex: images/(name.type)</h6>
                 
                 <button type='submit'>Add Product</button>
-                
+                <br/>
             </Form>
+            <br/>
             </Container>
             </div>
             : <Redirect to='/'/>}

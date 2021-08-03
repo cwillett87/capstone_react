@@ -27,7 +27,7 @@ const AddColor = (props) => {
             {!redirect ? 
             <Container>
             <Form onSubmit={handleSubmit}>
-                <Table>
+            <Table bordered variant='dark'>
             <thead>
                 <tr>
                     <th>Colors</th>
@@ -38,6 +38,7 @@ const AddColor = (props) => {
             </tbody>
             </Table>
             <label>New Color:
+            <br/>
                     <input
                         type='text'
                         name='color'
@@ -45,10 +46,11 @@ const AddColor = (props) => {
                         value={values.color}
                     />
                 </label>
-                
+                <br/><br/>
                 <button type='submit'>Add</button>
                 
             </Form>
+            <br/>
             </Container>
             : <Redirect to='/'/>}
         </div>
