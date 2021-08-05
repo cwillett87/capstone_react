@@ -11,6 +11,10 @@ import AddSize from "./addSize";
 function ProductTable(props) {
         console.log(props);
 
+        useEffect(() => {
+            props.getAllSizes()
+        },[])
+
         const [postVisible, setPostVisible] = useState(false);
         const [cartVisible, setCartVisible] = useState(false);
         const [colorVisible, setColorVisible] = useState(false);
@@ -188,10 +192,10 @@ function ProductTable(props) {
                 <center>
                 <br/>
                 <Button onClick={()=>{
-                showSizeForm();
+                showSizeForm()
             }}>Add Size</Button><br/><br/><br/>
             {sizeVisible? (
-                    <AddSize allSizes={props.allSizes} createSize={props.createSize} />
+                    <AddSize getAllSizes={props.getAllSizes} allSizes={props.allSizes} createSize={props.createSize} />
                     ):null}
                     <Button onClick={()=>{
                 showColorForm();

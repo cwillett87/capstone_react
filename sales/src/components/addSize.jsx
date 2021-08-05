@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
 import {withRouter, Redirect} from 'react-router-dom';
 import useForm from './useForm';
 import Form from 'react-bootstrap/Form';
@@ -7,6 +7,10 @@ import {Table, Container} from "react-bootstrap";
 const AddSize = (props) => {
     const {values, handleChange, handleSubmit} = useForm(sizeAdd);
     const [redirect,setRedirect] = useState(false);
+
+    useEffect(() => {
+        props.getAllSizes()
+    },[])
 
     async function sizeAdd() {
         const size = {...values}

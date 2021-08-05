@@ -328,12 +328,14 @@ function App() {
 
   let totalSales = (orders) => {
     let total = 0
+    
     let orderTotals = orders.map((order) => 
       (order.total))
-      setSales(orderTotals)
-      console.log(orderTotals)
-      for(let i =0; i < orderTotals.length;i++)
-      total += orderTotals[i]
+      let result = orderTotals.map(Number);
+      setSales(result)
+      console.log(result)
+      for(let i =0; i < result.length;i++)
+      total += result[i]
       console.log(total)
       setSalesTotal(total)
   }
@@ -413,7 +415,7 @@ function App() {
           loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
           <Route path='/product' render={props => <ProductPage {...props}  getProductReviews={getProductReviews}  loggedIn={loggedIn} createReview={createReview} getProductById={getProductById} productById={productById} 
           productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
-           <Route path='/' render={props => <ProductTable {...props} loggedIn={loggedIn} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
+           <Route path='/' render={props => <ProductTable {...props} getAllSizes={getAllSizes} loggedIn={loggedIn} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
            getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
            createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
           </Switch>
@@ -428,14 +430,14 @@ function App() {
         <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} loggedIn={loggedIn} />
         <Switch>
         <Route path='/sales' render={props => <DisplaySales {...props} sales={sales} productSales={productSales} userCarts={userCarts} allProducts={allProducts} salesTotal={salesTotal} paidOrders={paidOrders} allOrders={allOrders} />}/>
-        <Route path='/orders' render={props => <DisplayOrders {...props} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
+        <Route path='/orders' render={props => <DisplayOrders {...props} getAllOrders={getAllOrders} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
     <Route path='/show-cart' render={props => <DisplayCartPage {...props} getCartsByUserId={getCartsByUserId} newKey={newKey} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
       <Route path='/cart' render={props => <AddCart {...props} getCartsByUserId={getCartsByUserId} newKey={newKey} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
         productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews}  getProductReviews={getProductReviews}  />}/>
-         <Route path='/' render={props => <ProductTable {...props} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
+         <Route path='/' render={props => <ProductTable {...props} getAllSizes={getAllSizes} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
          getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
          createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
         </Switch>

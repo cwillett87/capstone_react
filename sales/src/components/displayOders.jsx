@@ -5,6 +5,11 @@ import Tracking from './updateTrackking'
 
 function DisplayOrders(props){
     console.log(props.allOrders)
+    
+    useEffect(() => {
+        props.getAllOrders()
+    },[])
+    
     if(props.allOrders === undefined){
         return null
     }
@@ -15,7 +20,7 @@ function DisplayOrders(props){
                 <td>{order.tracking_number}</td>
                 <td>{order.total}</td>
                 <td>Paid</td>
-                <Tracking updateOrder ={props.updateOrder} order={order} />
+                <Tracking getAllOrders={props.getAllOrders} updateOrder ={props.updateOrder} order={order} />
             </tr>
         })
         let shipped = props.shippedOrders.map((order)=>{

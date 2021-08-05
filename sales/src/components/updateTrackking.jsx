@@ -51,7 +51,7 @@ const Tracking = (props) => {
                     />
                 </label>
                 
-                <button className="move" type='submit'>Add</button>
+                <button className="move" type='submit' onClick={()=>props.getAllOrders()}>Add</button>
                 
             </Form>
             </center>
