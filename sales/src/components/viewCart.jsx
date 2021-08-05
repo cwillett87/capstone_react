@@ -13,6 +13,10 @@ function ViewCart(props){
     console.log(props)
     const [values, setValues] = useState([]);
     const [redirect,setRedirect] = useState(false);
+
+    useEffect(() => {
+        props.getCartsByUserId(props.user.id);
+      },[]);
     
     toast.configure()
         const notify = () => toast("Order Received");
@@ -53,6 +57,7 @@ function ViewCart(props){
             ['checked_Out']:true,
             ['shopping_carts']: props.cartIds
         }
+        console.log(order)
             props.createOrder(order);
             setRedirect(true);
             
@@ -78,7 +83,7 @@ function ViewCart(props){
                 <td>{cart.color_Id}</td>
                 <td>{cart.size_Id}</td>
                 <td>{cart.quantity}</td>
-                <td><center><DeleteFromCart cartid={cart.id} deleteCart={props.deleteCart}/></center></td>
+                <td><center><DeleteFromCart getCartsByUserId={props.getCartsByUserId} user={props.user} cartid={cart.id} deleteCart={props.deleteCart}/></center></td>
                 </tr>
         })
         return(

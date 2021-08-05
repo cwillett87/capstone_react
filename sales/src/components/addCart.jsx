@@ -10,6 +10,7 @@ function AddCart(props) {
 
     useEffect(() => {
         filterUserCarts(props.history.location.query.product.id);
+        props.getCartsByUserId(props.user.id)
       },[]);
 
     async function addToCart() {

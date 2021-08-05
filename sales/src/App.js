@@ -429,8 +429,8 @@ function App() {
         <Switch>
         <Route path='/sales' render={props => <DisplaySales {...props} sales={sales} productSales={productSales} userCarts={userCarts} allProducts={allProducts} salesTotal={salesTotal} paidOrders={paidOrders} allOrders={allOrders} />}/>
         <Route path='/orders' render={props => <DisplayOrders {...props} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
-      <Route path='/show-cart' render={props => <DisplayCartPage {...props} newKey={newKey} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
-      <Route path='/cart' render={props => <AddCart {...props} newKey={newKey} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
+    <Route path='/show-cart' render={props => <DisplayCartPage {...props} getCartsByUserId={getCartsByUserId} newKey={newKey} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
+      <Route path='/cart' render={props => <AddCart {...props} getCartsByUserId={getCartsByUserId} newKey={newKey} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
