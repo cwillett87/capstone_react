@@ -28,6 +28,7 @@ function Review(props){
                 ['quantity']: props.product.quantity,
                 ['main_image']:props.product.main_image}
                 console.log(newProduct)
+                setRedirect(true)
             props.updateProduct(props.product.id, newProduct);
         }
         else{
@@ -51,6 +52,7 @@ function Review(props){
             ['quantity']: props.product.quantity,
             ['main_image']:props.product.main_image}
             console.log(newProduct)
+            setRedirect(true)
         props.updateProduct(props.product.id, newProduct); 
         }
     }
@@ -137,7 +139,6 @@ else{
         <div>
             {!redirect ?
                 <div>
-                    <Container>
                     <Table bordered variant='dark'>
                 <thead>
                     <tr>
@@ -149,10 +150,8 @@ else{
                     {reviews}
                 </tbody>
             </Table>
-            </Container>
             <br/>
             <br/>
-            <Container>
             <Form onSubmit={handleSubmit}>
                 <h2>Please write a review</h2>
                 <br/>
@@ -176,11 +175,10 @@ else{
                 </label>
                 <br/>
                 <br/>
-                <button type='submit'>Submit</button>
+                <button type='submit' onClick={()=> props.getProductReviews(props.product.id)} >Submit</button>
                 <br/>
             </Form>
             <br/>
-            </Container>
             </div>
             : <Redirect to='/'/>}
         </div>

@@ -411,7 +411,7 @@ function App() {
           <Switch>
           <Route path='/login' render={props => <SignIn {...props} user={user} loggedIn={loggedIn} registerUser={registerUser} users={users}
           loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
-          <Route path='/product' render={props => <ProductPage {...props} loggedIn={loggedIn} createReview={createReview} getProductById={getProductById} productById={productById} 
+          <Route path='/product' render={props => <ProductPage {...props}  getProductReviews={getProductReviews}  loggedIn={loggedIn} createReview={createReview} getProductById={getProductById} productById={productById} 
           productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
            <Route path='/' render={props => <ProductTable {...props} loggedIn={loggedIn} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
            getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
@@ -434,7 +434,7 @@ function App() {
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
         <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
-        productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
+        productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews}  getProductReviews={getProductReviews}  />}/>
          <Route path='/' render={props => <ProductTable {...props} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
          getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
          createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
