@@ -117,21 +117,42 @@ useEffect(() => {
         )
         }
         else{
-            let paid = props.paidOrders[9].shopping_carts.map((order)=>{
+            
+            let totals =[]
+            let allQuantitys = []
+            for(let i=0;i<props.paidOrders.length;i++)
+             props.paidOrders[i].shopping_carts.map((order)=>{
                 
                 let total = 0
                 let sale = order.product_Id.price * order.quantity
+                
                 total += sale
-                props.productSales.push(order.product_Id)
+                totals.push(total)
+                allQuantitys.push(order.quantity)
+                const combo = {
+                    'order': order.product_Id,
+                    'total': total,
+                    'quantity':order.quantity
+                }
+                props.productSales.push(combo)
+             })
+             console.log(totals)
                 console.log(props.productSales )
-                return <tr>
-                    <td>{order.product_Id.name}</td>
-                    <td>{order.product_Id.price}</td>
-                    <td>{order.quantity}</td>
-                    <td>${total}.00</td>
+                let divide = props.productSales.length / 2
+                let sliced = props.productSales.slice(0,divide)
+                console.log(sliced )
+
+                let range = sliced.map((product)=>{
+                     
+                return<tr>
+                    <td>{product.order.name}</td>
+                    <td>{product.order.price}</td>
+                    <td>{product.quantity}</td>
+                    <td>${product.total}.00</td>
                 </tr>
+        
             })
-            
+            console.log(range[0])
 
             let inventory = props.allProducts.map((product)=>{
                 return <tr>
@@ -164,7 +185,7 @@ useEffect(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paid}
+                        {range}
                     </tbody>
                 </Table>
                 </Container>

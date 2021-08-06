@@ -439,7 +439,7 @@ function App() {
       <div>
         <NavbarOne logoutUser={logoutUser} getCartsByUserId={getCartsByUserId} user={user} loggedIn={loggedIn} />
         <Switch>
-        <Route path='/sales' render={props => <DisplaySales {...props} setSales={setSales} sales={sales} productSales={productSales} userCarts={userCarts} allProducts={allProducts} salesTotal={salesTotal} paidOrders={paidOrders} allOrders={allOrders} />}/>
+        <Route path='/sales' render={props => <DisplaySales {...props} setSales={setSales} sales={sales} setProductSales={setProductSales} productSales={productSales} userCarts={userCarts} allProducts={allProducts} salesTotal={salesTotal} paidOrders={paidOrders} allOrders={allOrders} />}/>
         <Route path='/orders' render={props => <DisplayOrders {...props} getAllOrders={getAllOrders} updateOrder ={updateOrder} unpaidOrders={unpaidOrders} readyOrders={readyOrders} shippedOrders={shippedOrders} allOrders={allOrders} />}/>
     <Route path='/show-cart' render={props => <DisplayCartPage {...props} setNewOrder={setNewOrder} getCartsByUserId={getCartsByUserId} newKey={newKey} cartIds={cartIds} productSales={productSales}  createOrder={createOrder} orderTotal={orderTotal} filteredProductIds={filteredProductIds} allProducts={allProducts}  user={user} userCarts={userCarts} deleteCart={deleteCart} />}/>
       <Route path='/cart' render={props => <AddCart {...props} getCartsByUserId={getCartsByUserId} newKey={newKey} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
