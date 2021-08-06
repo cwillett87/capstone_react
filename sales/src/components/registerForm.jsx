@@ -15,6 +15,7 @@ const RegisterForm = (props) => {
         const addUser = {...values, ['phone']: number}
         console.log(addUser);
         props.registerUser(addUser);
+        setRedirect(true)
     }
 
     return(

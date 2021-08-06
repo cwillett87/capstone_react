@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "react-bootstrap";
 import {withRouter, Redirect} from 'react-router-dom';
 
 function DeleteProduct(props){
     const [redirect,setRedirect] = useState(false);
+
+    useEffect(() => {
+        props.getAllProducts()
+    },[props.allProducts])
     
 let handleRemove = () => {
     setRedirect(true);
@@ -13,7 +17,7 @@ let handleRemove = () => {
         <td>
         {!redirect ? 
             <Button variant="danger" type="button" onClick={() =>
-                (props.deleteProduct(props.productId), handleRemove())}>Remove</Button>
+                (props.deleteProduct(props.productId), handleRemove(), setRedirect(true))}>Remove</Button>
                 : <Redirect to='/'/>}
                 </td>
     )

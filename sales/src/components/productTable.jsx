@@ -150,7 +150,7 @@ function ProductTable(props) {
                     props.getProductReviews(product.id)
                 }} to={{pathname: '/product', query:{product:product}}}>Details</Link></Button></center></td>
                 <td><center><Button active variant="danger">(Out of Stock)</Button></center></td>
-                <td><center><DeleteProduct deleteProduct={props.deleteProduct} productId={product.id} /></center></td>
+                <td><center><DeleteProduct allProducts={props.allProducts} setAllProducts={props.setAllProducts} getAllProducts={props.getAllProducts} deleteProduct={props.deleteProduct} productId={product.id} /></center></td>
             </tr>
           
             }else{
@@ -162,7 +162,7 @@ function ProductTable(props) {
                     props.getProductReviews(product.id)
                 }} to={{pathname: '/product', query:{product:product}}}>Details</Link></Button></center></td>
                 <td><center><Button active ><Link style={{textDecoration:'none', color: 'white'}} to={{pathname: '/cart', query:{product:product}}}>Add</Link></Button></center></td>
-                <td><center><DeleteProduct deleteProduct={props.deleteProduct} productId={product.id} /></center></td>
+                <td><center><DeleteProduct allProducts={props.allProducts} setAllProducts={props.setAllProducts} getAllProducts={props.getAllProducts} deleteProduct={props.deleteProduct} productId={product.id} /></center></td>
             </tr>
         }
     })
@@ -201,7 +201,7 @@ function ProductTable(props) {
                 showColorForm();
             }}>Add Color</Button><br/><br/><br/>
             {colorVisible? (
-                    <AddColor createColor={props.createColor} allColors={props.allColors} />
+                    <AddColor getAllColors={props.getAllColors} createColor={props.createColor} allColors={props.allColors} />
                     ):null}
                     </center>
                 <div>
@@ -210,7 +210,7 @@ function ProductTable(props) {
                 showPostForm();
             }}>Add Product</Button><br/><br/><br/>
             {postVisible? (
-                    <PostProduct user={props.user} createProducts={props.createProducts} />
+                    <PostProduct allProducts={props.allProducts} setAllProducts={props.setAllProducts} getAllProducts={props.getAllProducts} user={props.user} createProducts={props.createProducts} />
                     
                     ):null}
                     </center>

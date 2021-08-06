@@ -413,9 +413,9 @@ function App() {
           <Switch>
           <Route path='/login' render={props => <SignIn {...props} user={user} loggedIn={loggedIn} registerUser={registerUser} users={users}
           loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
-          <Route path='/product' render={props => <ProductPage {...props}  getProductReviews={getProductReviews}  loggedIn={loggedIn} createReview={createReview} getProductById={getProductById} productById={productById} 
+          <Route path='/product' render={props => <ProductPage {...props}  getProductReviews={getProductReviews}  setAllProducts={setAllProducts} allProducts={allProducts}  loggedIn={loggedIn} createReview={createReview} getProductById={getProductById} productById={productById} 
           productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews} />}/>
-           <Route path='/' render={props => <ProductTable {...props} getAllSizes={getAllSizes} loggedIn={loggedIn} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
+           <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} setAllProducts={setAllProducts} getAllProducts={getAllProducts} getAllColors={getAllColors} getAllSizes={getAllSizes} loggedIn={loggedIn} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
            getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
            createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
           </Switch>
@@ -435,9 +435,9 @@ function App() {
       <Route path='/cart' render={props => <AddCart {...props} getCartsByUserId={getCartsByUserId} newKey={newKey} updateProduct={updateProduct} userCarts={userCarts} updateCart={updateCart} productIds={productIds} user={user} createCart={createCart} />}/>
         <Route path='/login' render={props => <SignIn {...props}registerUser={registerUser} users={users}
         loginCurrentUser={loginCurrentUser} currentuser={getCurrentUser}/>}/>
-        <Route path='/product' render={props => <ProductPage {...props} createReview={createReview} getProductById={getProductById} productById={productById} 
+        <Route path='/product' render={props => <ProductPage {...props} createReview={createReview}  setAllProducts={setAllProducts} allProducts={allProducts} getProductById={getProductById} productById={productById} 
         productImages={filteredImages} getImages={getImageByProductId} updateProduct={updateProduct} user={user} reviews={reviews}  getProductReviews={getProductReviews}  />}/>
-         <Route path='/' render={props => <ProductTable {...props} getAllSizes={getAllSizes} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
+         <Route path='/' render={props => <ProductTable {...props} allProducts={allProducts} setAllProducts={setAllProducts} getAllProducts={getAllProducts} getAllColors={getAllColors} getAllSizes={getAllSizes} createSize={createSize} createColor={createColor} allSizes={allSizes} allColors={allColors} allProducts={allProducts} getProductReviews={getProductReviews} 
          getCartsByUserId={getCartsByUserId} user={user} userCarts={userCarts} deleteCart={deleteCart}
          createProducts={createProducts} deleteProduct={deleteProduct} createCart={createCart} />}/>
         </Switch>

@@ -139,6 +139,7 @@ else{
         <div>
             {!redirect ?
                 <div>
+                    <Container>
                     <Table bordered variant='dark'>
                 <thead>
                     <tr>
@@ -150,6 +151,7 @@ else{
                     {reviews}
                 </tbody>
             </Table>
+            </Container>
             <br/>
             <br/>
             <Form onSubmit={handleSubmit}>

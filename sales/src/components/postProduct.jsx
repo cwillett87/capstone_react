@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import useForm from './useForm';
 import {withRouter, Redirect} from 'react-router-dom';
@@ -11,6 +11,17 @@ function PostProduct(props) {
     const {values, handleChange, handleSubmit} = useForm(addProduct);
     const [redirect,setRedirect] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [newProducts, setNewProducts] = useState(props.allProducts);
+
+    useEffect(() => {
+        props.getAllProducts(props.allProducts)
+    },[])
+
+    let refresh = (product) =>{
+        setNewProducts(newProducts=>[...newProducts, product]);
+        props.allProducts.push(product)
+        console.log(newProducts)
+    }
 
     async function addProduct() {
         let sPrice = values.price;
@@ -20,9 +31,10 @@ function PostProduct(props) {
         let sQauntity = values.quantity;
         let nQauntity = parseInt(sQauntity);
         const newProduct = {...values, ['creator_Id']: props.user.id, ['price']: nPrice, ['ave_rating']: nRating, ['quantity']: nQauntity }
-        props.createProducts(newProduct);
+        props.createProducts(newProduct)
         console.log(newProduct)
         setRedirect(true);
+        refresh(newProduct)
     }
 
     // let fileHandler = event => {
@@ -138,7 +150,7 @@ function PostProduct(props) {
                 </label>
                 <h6 className='red' >Ex: images/(name.type)</h6>
                 
-                <button type='submit'>Add Product</button>
+                <button type='submit' onClick={()=>props.getAllProducts()}>Add Product</button>
                 <br/>
             </Form>
             <br/>
