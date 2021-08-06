@@ -11,6 +11,10 @@ function Review(props){
     const [redirect,setRedirect] = useState(false);
     const [ratings,setRatings] = useState([]);
 
+    useEffect(() => {
+        
+    },[props.reviews, props.allProducts])
+
 
     async function addReview(){
         let sRating = values.rating;
@@ -30,6 +34,7 @@ function Review(props){
                 console.log(newProduct)
                 setRedirect(true)
             props.updateProduct(props.product.id, newProduct);
+            props.getProductReviews(props.product.id)
         }
         else{
             let string = props.product.price;
@@ -53,7 +58,8 @@ function Review(props){
             ['main_image']:props.product.main_image}
             console.log(newProduct)
             setRedirect(true)
-        props.updateProduct(props.product.id, newProduct); 
+        props.updateProduct(props.product.id, newProduct);
+        props.getProductReviews(props.product.id) 
         }
     }
 if(props.loggedIn===false){
@@ -137,7 +143,7 @@ else{
         })
     return(
         <div>
-            {!redirect ?
+            
                 <div>
                     <Container>
                     <Table bordered variant='dark'>
@@ -182,7 +188,7 @@ else{
             </Form>
             <br/>
             </div>
-            : <Redirect to='/'/>}
+            
         </div>
     )
     }

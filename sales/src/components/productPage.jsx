@@ -10,6 +10,10 @@ import Review from './reviews'
 function ProductPage(props) {
     const [formVisible, setFormVisible] = useState(false);
 
+    useEffect(() => {
+        
+    },[props.history.location.query.product])
+
 let showUpdateForm = () => {
     setFormVisible(!formVisible)
 }
@@ -49,7 +53,7 @@ if(props.loggedIn===false){
                     </Container>
                     <br/>
                     <center>
-                    <Review getProductReviews={props.getProductReviews} user={props.user} loggedIn={props.loggedIn} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
+                    <Review allProducts={props.allProducts} getProductReviews={props.getProductReviews} user={props.user} loggedIn={props.loggedIn} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     </center>
                     <br/>
                 </div>
@@ -84,7 +88,7 @@ if(props.loggedIn===false){
             </Container>
             <br/>
             <center>
-                    <Review  getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
+                    <Review allProducts={props.allProducts}  getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     </center>
             <br/>
         </div>
@@ -128,7 +132,7 @@ if(props.user.role === 'customer'){
                     </Container>
                     <br/>
                     <center>
-                    <Review getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
+                    <Review allProducts={props.allProducts} getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     </center>
                     <br/>
                     </Container>
@@ -164,7 +168,7 @@ if(props.user.role === 'customer'){
             </Container>
             <br/>
             <center>
-                    <Review getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
+                    <Review allProducts={props.allProducts} getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     </center>
             <br/>
         </div>
@@ -208,7 +212,7 @@ else{
                     </Container>
                     <br/>
                     <center>
-                    <Review  getProductReviews={props.getProductReviews} loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
+                    <Review allProducts={props.allProducts}  getProductReviews={props.getProductReviews} loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                     </center>
                     <br/>
                     <div>
@@ -264,7 +268,7 @@ else{
             </Container>
             <br/>
             <center>
-                <Review getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
+                <Review allProducts={props.allProducts} getProductReviews={props.getProductReviews}  loggedIn={props.loggedIn} user={props.user} updateProduct={props.updateProduct} reviews={props.reviews} product={props.history.location.query.product} createReview={props.createReview} />
                 </center>
             <br/>
         </div>

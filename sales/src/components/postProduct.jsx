@@ -14,8 +14,8 @@ function PostProduct(props) {
     const [newProducts, setNewProducts] = useState(props.allProducts);
 
     useEffect(() => {
-        props.getAllProducts(props.allProducts)
-    },[])
+        
+    },[newProducts])
 
     let refresh = (product) =>{
         setNewProducts(newProducts=>[...newProducts, product]);
@@ -35,6 +35,7 @@ function PostProduct(props) {
         console.log(newProduct)
         setRedirect(true);
         refresh(newProduct)
+        props.getAllProducts()
     }
 
     // let fileHandler = event => {
@@ -60,7 +61,7 @@ function PostProduct(props) {
 
     return(
         <div>
-            {!redirect ? 
+            
             <div>
                 <h2 >Add a product</h2>
                 <br/>
@@ -156,7 +157,7 @@ function PostProduct(props) {
             <br/>
             </Container>
             </div>
-            : <Redirect to='/'/>}
+           
         </div>
     )
 }

@@ -9,14 +9,15 @@ const AddColor = (props) => {
     const [redirect,setRedirect] = useState(false);
 
     useEffect(() => {
-        props.getAllColors()
-    },[])
+        
+    },[props.allColors])
 
     async function colorAdd() {
         const color = {...values}
         props.createColor(color);
         setRedirect(true);
         console.log(color)
+        props.getAllColors()
     }
 
         let items = props.allColors.map((color)=>{
@@ -28,7 +29,7 @@ const AddColor = (props) => {
 
     return(
         <div>
-            {!redirect ? 
+            
             <Container>
             <Form onSubmit={handleSubmit}>
             <Table bordered variant='dark'>
@@ -51,12 +52,12 @@ const AddColor = (props) => {
                     />
                 </label>
                 <br/><br/>
-                <button type='submit'>Add</button>
+                <button type='submit' onClick={()=>props.getAllColors()}>Add</button>
                 
             </Form>
             <br/>
             </Container>
-            : <Redirect to='/'/>}
+            
         </div>
     )
 }

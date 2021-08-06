@@ -60,6 +60,8 @@ function ViewCart(props){
         console.log(order)
             props.createOrder(order);
             setRedirect(true);
+            props.setNewOrder(true)
+            console.log("new order true")
             
         }
 

@@ -9,14 +9,15 @@ const AddSize = (props) => {
     const [redirect,setRedirect] = useState(false);
 
     useEffect(() => {
-        props.getAllSizes()
-    },[])
+        
+    },[props.allSizes])
 
     async function sizeAdd() {
         const size = {...values}
         props.createSize(size);
         setRedirect(true);
         console.log(size)
+        props.getAllSizes()
     }
 
         let items = props.allSizes.map((size)=>{
@@ -28,7 +29,7 @@ const AddSize = (props) => {
 
     return(
         <div>
-            {!redirect ? 
+            
             <Container>
             <Form onSubmit={handleSubmit}>
             <Table bordered variant='dark'>
@@ -51,12 +52,12 @@ const AddSize = (props) => {
                     />
                 </label>
                 <br/><br/>
-                <button type='submit'>Add</button>
+                <button type='submit' onClick={()=>props.getAllSizes()}>Add</button>
                 
             </Form>
             <br/>
             </Container>
-            : <Redirect to='/'/>}
+            
         </div>
     )
 }

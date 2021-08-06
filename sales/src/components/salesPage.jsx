@@ -117,11 +117,13 @@ useEffect(() => {
         )
         }
         else{
-            let paid = props.paidOrders[0].shopping_carts.map((order)=>{
+            let paid = props.paidOrders[9].shopping_carts.map((order)=>{
                 
                 let total = 0
                 let sale = order.product_Id.price * order.quantity
                 total += sale
+                props.productSales.push(order.product_Id)
+                console.log(props.productSales )
                 return <tr>
                     <td>{order.product_Id.name}</td>
                     <td>{order.product_Id.price}</td>
@@ -129,7 +131,7 @@ useEffect(() => {
                     <td>${total}.00</td>
                 </tr>
             })
-        
+            
 
             let inventory = props.allProducts.map((product)=>{
                 return <tr>

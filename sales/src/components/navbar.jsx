@@ -10,7 +10,7 @@ const NavbarOne = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link style={{textDecoration: 'none', color: 'white'}} href="/login">Login</Nav.Link>
+          <Nav.Link style={{textDecoration: 'none', color: 'white'}}as={Link} to="/login">Login</Nav.Link>
         </Nav>
       </Navbar.Collapse>
   </Navbar>
@@ -24,7 +24,7 @@ const NavbarOne = (props) => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link style={{textDecoration: 'none', color: 'white'}} as={Link} to="/show-cart">View Cart</Nav.Link>
-          <Nav.Link style={{textDecoration: 'none', color: 'white'}} href="/" onClick={()=>{props.logoutUser()}}>Logout</Nav.Link>
+          <Nav.Link style={{textDecoration: 'none', color: 'white'}} as={Link} to="/" onClick={()=>{props.logoutUser()}}>Logout</Nav.Link>
         </Nav>
       </Navbar.Collapse>
   </Navbar>
@@ -41,7 +41,7 @@ const NavbarOne = (props) => {
         <Nav.Link style={{textDecoration: 'none', color: 'white'}} as={Link} to="/show-cart">View Cart</Nav.Link>
         <Nav.Link style={{textDecoration: 'none', color: 'white'}} as={Link} to="/orders">Orders</Nav.Link>
         <Nav.Link style={{textDecoration: 'none', color: 'white'}} as={Link} to="/sales">Sales</Nav.Link>
-        <Nav.Link style={{textDecoration: 'none', color: 'white'}} href="/" onClick={()=>{props.logoutUser()}}>Logout</Nav.Link>
+        <Nav.Link style={{textDecoration: 'none', color: 'white'}} as={Link} to="/" onClick={()=>{props.logoutUser()}}>Logout</Nav.Link>
       </Nav>
     </Navbar.Collapse>
 </Navbar>

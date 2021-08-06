@@ -8,6 +8,7 @@ import ViewCart from "./viewCart";
 import AddColor from "./addColor";
 import AddSize from "./addSize";
 
+
 function ProductTable(props) {
         console.log(props);
 
@@ -139,6 +140,7 @@ function ProductTable(props) {
         )
     }
     else{
+
         let products = props.allProducts.map((product) => {
             console.log(product)
             if(product.quantity === 0){

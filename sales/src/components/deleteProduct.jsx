@@ -6,18 +6,19 @@ function DeleteProduct(props){
     const [redirect,setRedirect] = useState(false);
 
     useEffect(() => {
-        props.getAllProducts()
+        
     },[props.allProducts])
     
 let handleRemove = () => {
     setRedirect(true);
+    props.getAllProducts()
 }
 
     return(
         <td>
         {!redirect ? 
             <Button variant="danger" type="button" onClick={() =>
-                (props.deleteProduct(props.productId), handleRemove(), setRedirect(true))}>Remove</Button>
+                (props.deleteProduct(props.productId),props.getAllProducts(), handleRemove(), setRedirect(true))}>Remove</Button>
                 : <Redirect to='/'/>}
                 </td>
     )
