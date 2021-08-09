@@ -62,7 +62,7 @@ function AddCart(props) {
             <div>
                 <img src={props.history.location.query.product.main_image}  width="150" height="100"/>
                 <h3>{props.history.location.query.product.name}</h3>
-                <h3>${props.history.location.query.product.price}.00</h3>
+                <h3>${props.history.location.query.product.price}</h3>
                 <h3>{props.history.location.query.product.ave_rating}</h3>
             <Form onSubmit={handleSubmit}>
                 <h2>Please select size, color and Qty</h2>

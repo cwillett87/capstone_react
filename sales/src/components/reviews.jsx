@@ -27,7 +27,7 @@ function Review(props){
             const newProduct = {['creator_Id']: props.user.id, 
                 ['name']: props.product.name,
                 ['description']: props.product.description,
-                ['price']: number+0.99, 
+                ['price']: number+0.00, 
                 ['ave_rating']: nRating, 
                 ['quantity']: props.product.quantity,
                 ['main_image']:props.product.main_image}

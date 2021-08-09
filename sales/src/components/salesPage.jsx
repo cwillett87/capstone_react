@@ -141,18 +141,17 @@ useEffect(() => {
                 let divide = props.productSales.length / 2
                 let sliced = props.productSales.slice(0,divide)
                 console.log(sliced )
-
+                
                 let range = sliced.map((product)=>{
                      
                 return<tr>
                     <td>{product.order.name}</td>
                     <td>{product.order.price}</td>
                     <td>{product.quantity}</td>
-                    <td>${product.total}.00</td>
+                    <td>${product.total}</td>
                 </tr>
         
             })
-            console.log(range[0])
 
             let inventory = props.allProducts.map((product)=>{
                 return <tr>
